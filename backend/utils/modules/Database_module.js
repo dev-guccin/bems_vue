@@ -47,6 +47,15 @@ async function connectPostgresql(config) {
         resolve(connection)
       }
     })
+    connection.on('error', (err) => {
+      console.error('Client-level error occurred:', err);
+    });
+    connection.on('end', () => {
+      console.log('Client disconnected');
+    });
+    connection.on('notice', (notice) => {
+      console.log('Server notice:', notice.message);
+    });
   })
 }
 
@@ -972,7 +981,7 @@ async function reConnectDatabse() {
   for (const dbId in DATABASE) {
     const database = DATABASE[dbId];
     if (database.DB_Type === 1) {
-      if (CONNECTION[dbId] && CONNECTION[dbId].state === 'disconnected') {
+      if (CONNECTION[dbId] && ["connected", "authenticated"].includes(CONNECTION[dbId].state) === false) {
         console.error(database.Details, "이 연결되어 있지 않아 재연결 시도합니다.");
         await connectDatabase(database)
       }

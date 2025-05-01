@@ -93,13 +93,9 @@ jobs.forEach((job) => {
 
 const log_list = [
   "bacnet-err.log",
-  "bacnet-out.log",
   "batch-err.log",
-  "batch-out.log",
   "database-err.log",
-  "database-out.log",
   "modbus-err.log",
-  "modbus-out.log",
 ]
 new cronJob("0 5 0 * * *", () => {
   //여러 잡이 동시에 돌때 트래픽이 너무 몰리지 않도록 하기 위해 0시 5분에 돌도록 함

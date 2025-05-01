@@ -1,9 +1,9 @@
 
-const log_list = ['bacnet-err.log', 'bacnet-out.log', 'batch-err.log', 'batch-out.log', 'database-err.log', 'database-out.log', 'modbus-err.log', 'modbus-out.log']
+const log_list = ['bacnet-err.log', 'batch-err.log', 'database-err.log', 'modbus-err.log']
 
 const fs = require('fs');
-    for (let i=0; i < log_list.length; i++) {
-        fs.writeFile(`../log/${log_list[i]}`, "",(err) => {
-           console.log("error / cannot find file / already cleared")
-        });
-    }
+for (let i = 0; i < log_list.length; i++) {
+    fs.writeFile(`../log/${log_list[i]}`, "", (err) => {
+        console.log("error / cannot find file / already cleared")
+    });
+}

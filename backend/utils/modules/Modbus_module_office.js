@@ -528,7 +528,6 @@ async function modbus_output() {
 // log  file  day reset
 const cronJob = require("cron").CronJob; //knj
 
-// const log_list = ['bacnet-err.log', 'bacnet-out.log', 'batch-err.log', 'batch-out.log', 'database-err.log', 'database-out.log', 'modbus-err.log', 'modbus-out.log']
 const log_list = [
   "bacnet-err.log",
   "batch-err.log",
