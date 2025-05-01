@@ -14,9 +14,8 @@ function makeStringSetXml(objectName, changedCtrl, indoor) {
   return `<?xml version='1.0' encoding='UTF-8'?><root><header sa='mfc' da='dms' messageType='request' dateTime='2011 01 11T12:20:00' dvmControlMode='individual'/><setControl><simple ${objectName}='${changedCtrl}' /><remocon enable='true'/><indoorList><indoor addr='${indoor}' /></indoorList></setControl></root>`;
 }
 
-function makeSimpleTag() {}
 module.exports = {
-  setCtrlValue: async function (cb) {
+  setCtrlValue: async function (callback) {
     const rows = await Database.selectNotNull("xml");
 
     for (let i = 0; i < rows.length; i++) {
@@ -44,7 +43,7 @@ module.exports = {
         // Number인경우 xml로 바로 변환
         xml = makeStringSetXml(objectName, ctrlValue, rts.getIndoor());
       }
-      cb(xml);
+      callback(xml);
       // 데이터를 보내고 난뒤 ctrl value를 비워준다
       Database.updateCtrlValueToNull(rts.getId());
     }

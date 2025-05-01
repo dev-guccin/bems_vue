@@ -52,6 +52,7 @@ let indoorName = {}; // "11.05.07": "체련단련실2" 의 데이터가 저장�
 let packet = 0;
 
 function main() {
+  // 소켓을 연결하고 이벤트에 대한 정의를 수행한다.
   for (let i = 0; i < config.length; i++) {
     const serverInfo = config[i];
     buffers[i] = Buffer.alloc(0);
@@ -120,7 +121,7 @@ function main() {
       }
       isSending[i] = true;
       SOCKETS[i].write(getMonitoringXml);
-    }, 1000 * 10); // 10초에 한번씩 데이터를 받아옴
+    }, 1000 * 30); // 30초에 한번씩 데이터를 받아옴
 
     setInterval(() => {
       setCtrlValue((xml) => {
@@ -158,4 +159,4 @@ setInterval(() => {
       SOCKETS[i].connect({ port: serverInfo.port, host: serverInfo.host });
     }
   }
-}, 1000 * 30) // 30초에 한번씩 연결을 확인한다.
+}, 1000 * 60) // 60초에 한번씩 연결을 확인한다.
